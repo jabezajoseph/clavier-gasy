@@ -17,10 +17,7 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
-
-      - name: Installer Gradle
-        uses: gradle/actions/setup-gradle@v3
-
+          
       - name: Installer Android SDK
         uses: android-actions/setup-android@v3
 
