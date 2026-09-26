@@ -5,7 +5,8 @@
     <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="34" />
 
     <application
-        android:label="ZartKlm">
+        android:label="ZartKlm"
+        android:icon="@mipmap/ic_launcher">
 
         <service
             android:name=".ZartKlmService"
