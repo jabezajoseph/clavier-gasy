@@ -1,5 +1,6 @@
 package com.jabeza.zartklm;
 
+import android.content.SharedPreferences;
 import android.inputmethodservice.InputMethodService;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
@@ -14,29 +15,51 @@ import java.util.List;
 public class ZartKlmService extends InputMethodService
         implements KeyboardView.OnKeyboardActionListener {
 
+    private static final String PREFS = "zartklm_prefs";
+    private static final String KEY_THEME = "theme_teal";
+
     private KeyboardView keyboardView;
     private LinearLayout suggestionBar;
-    private Keyboard keyboardAzerty;
+    private Keyboard keyboardGasy;
     private Keyboard keyboardSymbols;
     private boolean capsLock = false;
     private boolean symbolsMode = false;
+    private boolean useTealTheme = false;
     private StringBuilder currentWord = new StringBuilder();
 
     @Override
     public View onCreateInputView() {
-        View root = LayoutInflater.from(this).inflate(R.layout.keyboard_view, null);
+        SharedPreferences prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
+        useTealTheme = prefs.getBoolean(KEY_THEME, false);
+        int layoutPreset = prefs.getInt("layout_preset", 2);
+
+        int layoutRes = useTealTheme ? R.layout.keyboard_view_teal : R.layout.keyboard_view_dark;
+        View root = LayoutInflater.from(this).inflate(layoutRes, null);
 
         keyboardView = root.findViewById(R.id.keyboardView);
         suggestionBar = root.findViewById(R.id.suggestionBar);
 
-        keyboardAzerty = new Keyboard(this, R.xml.keyboard_azerty);
+        int gasyXmlRes;
+        switch (layoutPreset) {
+            case 1: gasyXmlRes = R.xml.keyboard_gasy_original; break;
+            case 3: gasyXmlRes = R.xml.keyboard_gasy_alpha; break;
+            default: gasyXmlRes = R.xml.keyboard_gasy_lmps; break;
+        }
+        keyboardGasy = new Keyboard(this, gasyXmlRes);
         keyboardSymbols = new Keyboard(this, R.xml.keyboard_symbols);
 
-        keyboardView.setKeyboard(keyboardAzerty);
+        keyboardView.setKeyboard(symbolsMode ? keyboardSymbols : keyboardGasy);
         keyboardView.setOnKeyboardActionListener(this);
         keyboardView.setPreviewEnabled(true);
 
         return root;
+    }
+
+    private void toggleTheme() {
+        useTealTheme = !useTealTheme;
+        getSharedPreferences(PREFS, MODE_PRIVATE)
+                .edit().putBoolean(KEY_THEME, useTealTheme).apply();
+        setInputView(onCreateInputView());
     }
 
     private void updateSuggestions() {
@@ -77,13 +100,17 @@ public class ZartKlmService extends InputMethodService
 
             case Keyboard.KEYCODE_SHIFT:
                 capsLock = !capsLock;
-                keyboardAzerty.setShifted(capsLock);
+                keyboardGasy.setShifted(capsLock);
                 keyboardView.invalidateAllKeys();
                 break;
 
             case Keyboard.KEYCODE_MODE_CHANGE:
                 symbolsMode = !symbolsMode;
-                keyboardView.setKeyboard(symbolsMode ? keyboardSymbols : keyboardAzerty);
+                keyboardView.setKeyboard(symbolsMode ? keyboardSymbols : keyboardGasy);
+                break;
+
+            case -10: // bouton thème 🎨
+                toggleTheme();
                 break;
 
             case Keyboard.KEYCODE_DONE:
@@ -113,7 +140,6 @@ public class ZartKlmService extends InputMethodService
         }
     }
 
-    // Gestion des accents (popup au clic sur un caractère alternatif)
     @Override
     public void onText(CharSequence text) {
         InputConnection ic = getCurrentInputConnection();
