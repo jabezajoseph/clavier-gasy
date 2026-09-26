@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="keyboard_background">#1A1A2E</color>
+    <color name="key_normal">#16213E</color>
+    <color name="key_pressed">#0F9D58</color>
+    <color name="key_special">#0F3460</color>
+    <color name="key_text">#FFFFFF</color>
+    <color name="candidate_background">#0F0F1A</color>
+    <color name="candidate_text">#E0E0E0</color>
+    <color name="accent">#00B4D8</color>
+
+    <!-- Thème 2 : Vert Malagasy -->
+    <color name="keyboard_background_teal">#0B3D2E</color>
+    <color name="key_normal_teal">#14532D</color>
+    <color name="key_pressed_teal">#F97316</color>
+    <color name="candidate_background_teal">#062018</color>
+
+</resources>
