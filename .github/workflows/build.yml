@@ -23,6 +23,8 @@ jobs:
 
       - name: Installer Android SDK
         uses: android-actions/setup-android@v3
+        with:
+          packages: 'platform-tools platforms;android-34 build-tools;34.0.0'
 
       - name: Compiler l'APK (debug)
         run: gradle assembleDebug
