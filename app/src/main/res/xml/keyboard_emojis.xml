@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
+    android:keyWidth="12.5%p"
+    android:keyHeight="10%p"
+    android:horizontalGap="1px"
+    android:verticalGap="2px">
+
+    <!-- Andalana 1 -->
+    <Row>
+        <Key android:keyOutputText="😀" android:keyLabel="😀" />
+        <Key android:keyOutputText="😂" android:keyLabel="😂" />
+        <Key android:keyOutputText="🥰" android:keyLabel="🥰" />
+        <Key android:keyOutputText="😎" android:keyLabel="😎" />
+        <Key android:keyOutputText="😭" android:keyLabel="😭" />
+        <Key android:keyOutputText="😡" android:keyLabel="😡" />
+        <Key android:keyOutputText="👍" android:keyLabel="👍" />
+        <Key android:keyOutputText="🙏" android:keyLabel="🙏" />
+    </Row>
+
+    <!-- Andalana 2 -->
+    <Row>
+        <Key android:keyOutputText="❤️" android:keyLabel="❤️" />
+        <Key android:keyOutputText="🔥" android:keyLabel="🔥" />
+        <Key android:keyOutputText="🎉" android:keyLabel="🎉" />
+        <Key android:keyOutputText="✨" android:keyLabel="✨" />
+        <Key android:keyOutputText="💯" android:keyLabel="💯" />
+        <Key android:keyOutputText="👏" android:keyLabel="👏" />
+        <Key android:keyOutputText="🤔" android:keyLabel="🤔" />
+        <Key android:keyOutputText="😅" android:keyLabel="😅" />
+    </Row>
+
+    <!-- Andalana 3 -->
+    <Row>
+        <Key android:keyOutputText="😊" android:keyLabel="😊" />
+        <Key android:keyOutputText="😍" android:keyLabel="😍" />
+        <Key android:keyOutputText="😘" android:keyLabel="😘" />
+        <Key android:keyOutputText="😜" android:keyLabel="😜" />
+        <Key android:keyOutputText="🤩" android:keyLabel="🤩" />
+        <Key android:keyOutputText="🥺" android:keyLabel="🥺" />
+        <Key android:keyOutputText="😢" android:keyLabel="😢" />
+        <Key android:keyOutputText="😱" android:keyLabel="😱" />
+    </Row>
+
+    <!-- Andalana 4: Hiverina any amin'ny litera (ABC) sy ELANA -->
+    <Row>
+        <Key android:codes="-11" android:keyLabel="ABC" android:keyWidth="20%p" />
+        <Key android:codes="32" android:keyLabel="ELANA" android:keyWidth="55%p" />
+        <Key android:codes="-5" android:keyLabel="⌫" android:keyWidth="25%p" android:isRepeatable="true" />
+    </Row>
+
+</Keyboard>
