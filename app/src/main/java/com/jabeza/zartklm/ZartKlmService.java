@@ -22,6 +22,7 @@ public class ZartKlmService extends InputMethodService
     private LinearLayout suggestionBar;
     private Keyboard keyboardGasy;
     private Keyboard keyboardSymbols;
+    private Keyboard keyboardEmojis; // NOUVEAU
     private boolean capsLock = false;
     private boolean symbolsMode = false;
     private boolean useTealTheme = false;
@@ -47,6 +48,7 @@ public class ZartKlmService extends InputMethodService
         }
         keyboardGasy = new Keyboard(this, gasyXmlRes);
         keyboardSymbols = new Keyboard(this, R.xml.keyboard_symbols);
+        keyboardEmojis = new Keyboard(this, R.xml.keyboard_emojis); // NOUVEAU
 
         keyboardView.setKeyboard(symbolsMode ? keyboardSymbols : keyboardGasy);
         keyboardView.setOnKeyboardActionListener(this);
@@ -109,8 +111,13 @@ public class ZartKlmService extends InputMethodService
                 keyboardView.setKeyboard(symbolsMode ? keyboardSymbols : keyboardGasy);
                 break;
 
-            case -10: // bouton thème 🎨
-                toggleTheme();
+            case -10: // bouton emoji 😊
+                keyboardView.setKeyboard(keyboardEmojis);
+                break;
+
+            case -11: // bouton ABC (hiverina any amin'ny litera)
+                keyboardView.setKeyboard(keyboardGasy);
+                symbolsMode = false;
                 break;
 
             case Keyboard.KEYCODE_DONE:
@@ -119,7 +126,7 @@ public class ZartKlmService extends InputMethodService
                         android.view.KeyEvent.KEYCODE_ENTER));
                 break;
 
-            case 32: // espace
+            case 32: // espace / ELANA
                 ic.commitText(" ", 1);
                 currentWord.setLength(0);
                 updateSuggestions();
@@ -149,7 +156,6 @@ public class ZartKlmService extends InputMethodService
         updateSuggestions();
     }
 
-    // Méthodes obligatoires de l'interface (non utilisées ici)
     @Override public void onPress(int primaryCode) {}
     @Override public void onRelease(int primaryCode) {}
     @Override public void swipeLeft() {}
