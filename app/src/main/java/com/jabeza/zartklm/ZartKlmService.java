@@ -22,7 +22,7 @@ public class ZartKlmService extends InputMethodService
     private LinearLayout suggestionBar;
     private Keyboard keyboardGasy;
     private Keyboard keyboardSymbols;
-    private Keyboard keyboardEmojis; // NOUVEAU
+    private Keyboard keyboardEmojis;
     private boolean capsLock = false;
     private boolean symbolsMode = false;
     private boolean useTealTheme = false;
@@ -32,7 +32,6 @@ public class ZartKlmService extends InputMethodService
     public View onCreateInputView() {
         SharedPreferences prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
         useTealTheme = prefs.getBoolean(KEY_THEME, false);
-        int layoutPreset = prefs.getInt("layout_preset", 2);
 
         int layoutRes = useTealTheme ? R.layout.keyboard_view_teal : R.layout.keyboard_view_dark;
         View root = LayoutInflater.from(this).inflate(layoutRes, null);
@@ -40,15 +39,10 @@ public class ZartKlmService extends InputMethodService
         keyboardView = root.findViewById(R.id.keyboardView);
         suggestionBar = root.findViewById(R.id.suggestionBar);
 
-        int gasyXmlRes;
-        switch (layoutPreset) {
-            case 1: gasyXmlRes = R.xml.keyboard_gasy_original; break;
-            case 3: gasyXmlRes = R.xml.keyboard_gasy_alpha; break;
-            default: gasyXmlRes = R.xml.keyboard_gasy_lmps; break;
-        }
-        keyboardGasy = new Keyboard(this, gasyXmlRes);
+        // Mampiasa keyboard_gasy_alpha.xml foana
+        keyboardGasy = new Keyboard(this, R.xml.keyboard_gasy_alpha);
         keyboardSymbols = new Keyboard(this, R.xml.keyboard_symbols);
-        keyboardEmojis = new Keyboard(this, R.xml.keyboard_emojis); // NOUVEAU
+        keyboardEmojis = new Keyboard(this, R.xml.keyboard_emojis);
 
         keyboardView.setKeyboard(symbolsMode ? keyboardSymbols : keyboardGasy);
         keyboardView.setOnKeyboardActionListener(this);
