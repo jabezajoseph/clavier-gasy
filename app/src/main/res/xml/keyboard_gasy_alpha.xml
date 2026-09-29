@@ -44,7 +44,7 @@
 
     <!-- Andalana 4: Natao tsotra aloha ny soratra -->
     <Row>
-        <Key android:codes="-2" android:keyLabel="?123" android:keyWidth="15%p" />
+        <Key android:codes="-2" android:keyLabel="123" android:keyWidth="15%p" />
         <Key android:codes="39" android:keyLabel="\'" android:keyWidth="10%p" />
         <Key android:codes="-10" android:keyLabel="EMO" android:keyWidth="10%p" />
         <Key android:codes="32" android:keyLabel="ELANA" android:keyWidth="40%p"
